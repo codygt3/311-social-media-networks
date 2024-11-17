@@ -55,25 +55,29 @@ def main():
             generate_interesting_user_network_diagram(dataset, attributes, min_posts, max_reading_level)
 
         elif choice == "3":
-            # Parameters for Algorithm 3
+            # Prompt for include and exclude keywords
             include_keywords = input("Enter keywords to include (comma-separated), or leave blank for none: ").split(",")
             exclude_keywords = input("Enter keywords to exclude (comma-separated), or leave blank for none: ").split(",")
+
+            # Initialize user attributes filter
             user_attributes = {}
 
+            # Check if user wants to filter by attributes
             add_attr = input("Would you like to filter posts by user attributes? (yes/no): ").strip().lower()
             if add_attr == "yes":
+                print("Enter attribute key-value pairs (e.g., age: 25, gender: female). Type 'done' when finished.")
                 while True:
-                    key = input("Enter attribute key (e.g., age, gender) or 'done' to finish: ")
-                    if key == "done":
+                    key = input("Enter attribute key (e.g., age, gender) or 'done' to finish: ").strip()
+                    if key.lower() == "done":
                         break
-                    value = input(f"Enter value for {key}: ")
+                    value = input(f"Enter value for {key}: ").strip()
                     user_attributes[key] = value
 
-            # Filter out empty strings in lists if no input was given
+            # Clean up keyword lists
             include_keywords = [word.strip() for word in include_keywords if word.strip()]
             exclude_keywords = [word.strip() for word in exclude_keywords if word.strip()]
 
-            # Call the function
+            # Call the function with filtered parameters
             generate_word_cloud(dataset, include_keywords, exclude_keywords, user_attributes)
 
         elif choice == "4":
