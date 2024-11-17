@@ -86,16 +86,17 @@ def main():
             keywords_exclude = input("Enter keywords to exclude (comma-separated), or leave blank for none: ").split(",")
             user_attributes = {}
 
+            # Prompt to filter trending posts by user attributes
             add_attr = input("Would you like to filter trending posts by user attributes? (yes/no): ").strip().lower()
             if add_attr == "yes":
                 while True:
-                    key = input("Enter attribute key (e.g., age, gender) or 'done' to finish: ")
-                    if key == "done":
+                    key = input("Enter attribute key (e.g., age, gender) or 'done' to finish: ").strip()
+                    if key.lower() == "done":
                         break
-                    value = input(f"Enter value for {key}: ")
+                    value = input(f"Enter value for {key}: ").strip()
                     user_attributes[key] = value
 
-            # Filter out empty strings in lists if no input was given
+            # Clean up keyword lists to remove empty strings
             keywords_include = [word.strip() for word in keywords_include if word.strip()]
             keywords_exclude = [word.strip() for word in keywords_exclude if word.strip()]
 
